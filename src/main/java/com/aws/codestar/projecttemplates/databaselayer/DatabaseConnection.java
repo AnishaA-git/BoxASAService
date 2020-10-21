@@ -15,9 +15,8 @@ public class DatabaseConnection {
 		Connection con = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/281-project-1","root", "hello");
-			//con = DriverManager.getConnection("jdbc:mysql://database-2.cefaiucwkkve.us-west-1.rds.amazonaws.com:3306/test","root","testadmin");
-
+			String jdbcConnection = System.getenv("JDBC_CONNECTION");
+			con = DriverManager.getConnection(jdbcConnection);
 			if (con != null)
 				System.out.println("connection successful");
 			else
