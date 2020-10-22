@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.nio.file.FileSystems;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
+import com.aws.codestar.projecttemplates.databaselayer.DeleteFileFromDatabase;
 import com.aws.codestar.projecttemplates.databaselayer.FileDetailsToDatabase;
 
 @MultipartConfig
@@ -53,9 +55,9 @@ public class MainMenuController extends HttpServlet {
 		ArrayList<String> arrayListOfFile;
 		arrayListOfFile = new ArrayList<>();
 		String firstusername = request.getSession(true).getAttribute("firstusername").toString();
-		String accesskey = System.getenv("AWS_ACCESS_KEY_ID");
-		String secretkey = System.getenv("AWS_SECRET_ACCESS_KEY");
-		
+		String accesskey = System.getProperty("AWS_ACCESS_KEY_ID");
+		String secretkey = System.getProperty("AWS_SECRET_ACCESS_KEY");
+
 		AWSCredentials credentials = new BasicAWSCredentials(accesskey, secretkey);
 		AmazonS3 s3client = new AmazonS3Client(credentials);
 		s3client.setRegion(Region.getRegion(Regions.US_WEST_1));
@@ -85,15 +87,33 @@ public class MainMenuController extends HttpServlet {
 
 		for (Part filePart : fileParts) {
 			String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-
+			String key = firstusername + CommonConstants.SUFFIX + fileName;
 			InputStream fileContent = filePart.getInputStream();
 
 			StringWriter writer = new StringWriter();
 			IOUtils.copy(fileContent, writer, "UTF-8");
 			String theFileContent = writer.toString();
 
-			//File file = new File("C:\\Users\\anish\\anisha-workspace-281-1\\uploadfiles" + fileName);
-			File file = new File(fileName);
+			String ec2_location = System.getProperty("user.dir") + "/" + "anisha/" + firstusername + fileName;
+			System.out.println("######################################");
+			System.out.println("file name is: " + fileName);
+			System.out.println("this is fro system property: " + System.getProperty("user.dir"));
+			System.out.println("ec2_location: " + ec2_location);
+			System.out.println("######################################");
+
+			File file = new File(ec2_location);
+			if (file.exists()) {
+				// this is update mode
+				file.delete();
+				DeleteFileFromDatabase d = new DeleteFileFromDatabase();
+				d.deleteFile(fileName);
+				s3client.deleteObject(CommonConstants.BUCKET_NAME, key);
+			}
+
+			file.setExecutable(true);
+			file.setReadable(true);
+			file.setWritable(false);
+
 			file.createNewFile();
 
 			FileWriter fwriter = new FileWriter(file);

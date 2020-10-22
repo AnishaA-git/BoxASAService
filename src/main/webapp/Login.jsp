@@ -61,21 +61,24 @@
 					</div>
 					<br> <br>
 					
-					<div class="container-login100-form-btn">
-						<div class="wrap-login100-form-btn">
-							<div class="login100-form-bgbtn"></div>
-							<button class="login100-form-btn">
-								Login
-							</button>
+						<div class="container-login100-form-btn">
+							<div class="wrap-login100-form-btn">
+								<div class="login100-form-bgbtn"></div>
+									<a data-toggle="tooltip" data-placement="top" 
+									title="For Admin panel, please use firstname/lastname/password as admin/admin/admin. Thank you!">
+										<button class="login100-form-btn">
+											Login
+										</button>
+									</a>
+							</div>
 						</div>
-					</div>
 					
-					<div class="flex-c-m">
-
-						<a href="#" class="login100-social-item bg3">
-							<i class="fa fa-google"></i>
-						</a>
-					</div>
+<!-- 					<div class="flex-c-m"> -->
+<!-- 						<a href="#" class="login100-social-item bg3"> -->
+<!-- 							<i class="fa fa-google"></i> -->
+<!-- 						</a> -->
+<!-- 					</div> -->
+					
 					<br>
 					<div class="flex-col-c p-t-155">
 						<span class="txt1 p-b-17">
@@ -108,20 +111,13 @@
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
-	
-	<!-- <script type="text/javascript">
-    function validateForm()
-    {
-        
-        if (firstusername==null || firstusername=="",lastusername==null || lastusername=="", password==null ||password =="")
-        {
-            alert("User name and password can not be empty");
-            return false;
-        }
-    }
-    
-    </script> -->
-	
+
+	<script>
+		$(document).ready(function() {
+			$('[data-toggle="tooltip"]').tooltip();
+		});
+	</script>
+
 </body>
 </html>
 

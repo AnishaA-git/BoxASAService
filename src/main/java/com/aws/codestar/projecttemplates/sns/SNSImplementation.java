@@ -18,8 +18,8 @@ public class SNSImplementation {
 	public void setNotificationMethod() {
 		try {
 			System.out.println("in sns");
-			String accesskey = System.getenv("AWS_ACCESS_KEY_ID");
-			String secretkey = System.getenv("AWS_SECRET_ACCESS_KEY");
+			String accesskey = System.getProperty("AWS_ACCESS_KEY_ID");
+			String secretkey = System.getProperty("AWS_SECRET_ACCESS_KEY");
 			AWSCredentials credentials = new BasicAWSCredentials(accesskey,secretkey);
 
 			AmazonSNSClient snsClient = new AmazonSNSClient(credentials);

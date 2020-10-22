@@ -38,7 +38,7 @@ public class LoginController extends HttpServlet {
 
 		LoginDatabase loginObject = new LoginDatabase();
 		flagForLogin = loginObject.login(firstusername, lastusername, password);
-		if (firstusername.equals("Admin")) {
+		if (firstusername.equals("admin")) {
 			AdminLoginController adminUser = new AdminLoginController();
 			adminUser.doPost(request, response);
 		} else if (flagForLogin) {

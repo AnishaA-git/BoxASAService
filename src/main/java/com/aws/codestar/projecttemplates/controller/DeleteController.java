@@ -29,8 +29,8 @@ public class DeleteController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String accesskey = System.getenv("AWS_ACCESS_KEY_ID");
-		String secretkey = System.getenv("AWS_SECRET_ACCESS_KEY");
+		String accesskey = System.getProperty("AWS_ACCESS_KEY_ID");
+		String secretkey = System.getProperty("AWS_SECRET_ACCESS_KEY");
 		String firstusername = request.getSession(false).getAttribute("firstusername").toString();
 		String filename = request.getParameter("myObject");
 		String key;

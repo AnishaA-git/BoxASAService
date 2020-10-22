@@ -28,8 +28,8 @@ public class DeleteControllerForAdmin extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String accesskey = System.getenv("AWS_ACCESS_KEY_ID");
-		String secretkey = System.getenv("AWS_SECRET_ACCESS_KEY");
+		String accesskey = System.getProperty("AWS_ACCESS_KEY_ID");
+		String secretkey = System.getProperty("AWS_SECRET_ACCESS_KEY");
 		String key = request.getParameter("myObject");
 		System.out.println("key:  " + key);
 		int suffix = key.indexOf(CommonConstants.SUFFIX);

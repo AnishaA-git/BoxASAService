@@ -37,6 +37,7 @@ public class AdminLoginDatabase {
 					DatabaseFilePojo user = new DatabaseFilePojo();
 					user.setFileName(resultSetObject.getString(1));
 					user.setFileDescription(resultSetObject.getString(2));
+					user.setFileUploadTime(resultSetObject.getString(3));
 					user.setFirstusername(resultSetObject.getString(4));
 					userList.add(user);
 				}

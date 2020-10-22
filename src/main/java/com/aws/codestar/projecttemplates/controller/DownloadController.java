@@ -38,12 +38,12 @@ public class DownloadController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String accesskey = System.getenv("AWS_ACCESS_KEY_ID");
-		String secretkey = System.getenv("AWS_SECRET_ACCESS_KEY");
+		String accesskey = System.getProperty("AWS_ACCESS_KEY_ID");
+		String secretkey = System.getProperty("AWS_SECRET_ACCESS_KEY");
 		String firstusername = request.getSession(false).getAttribute("firstusername").toString();
 		String filename = request.getParameter("myObject");
 		String key;
-		String dir = "C:\\Users\\anish\\Desktop\\281_Cloud_Technology\\";
+		String ec2_location = System.getProperty("user.dir")+"/"+"anisha/"+firstusername+filename;
 		key = firstusername + CommonConstants.SUFFIX + filename;
 		try {
 			AWSCredentials credentials = new BasicAWSCredentials(accesskey,secretkey);
@@ -62,7 +62,7 @@ public class DownloadController extends HttpServlet {
 			IOUtils.copy(objectData, writer, "UTF-8");
 			String theFileContent = writer.toString();
 
-			String totalfileName = dir + filename;
+			String totalfileName = ec2_location + filename;
 			File file = new File(totalfileName);
 			file.createNewFile();
 
@@ -70,7 +70,7 @@ public class DownloadController extends HttpServlet {
 			fwriter.write(theFileContent);
 			fwriter.close();
 			ServletContext context = getServletContext();
-			String mimeType = context.getMimeType(dir);
+			String mimeType = context.getMimeType(ec2_location);
 
 			if (mimeType == null) {
 				mimeType = "application/octet-stream";

@@ -110,8 +110,10 @@
 								<td>
 									<form action="MainMenuController" method="post"
 										enctype="multipart/form-data">
+										<a data-toggle="tooltip" data-placement="bottom" 
+										title="The file name should not have spaces.">
 										<input type="file" class="proj281" id="file2" name="file"
-											multiple><input type="submit" class="proj281"
+											multiple></a><input type="submit" class="proj281"
 											value="Submit" id="btnSubmit" />
 									</form>
 								</td>
@@ -126,8 +128,13 @@
 					<form id="myform" action="MainMenuController"
 						onsubmit="return myFunction();" method="post"
 						enctype="multipart/form-data">
-						<label for="file">Choose file to upload</label> <input type="file"
+									
+							<label for="file">Choose file to upload</label> 
+						<a data-toggle="tooltip" data-placement="bottom"
+						title="The file name should not have spaces.">
+						<input type="file"
 							class="proj281" id="file" name="file" multiple> <br>
+						</a>
 						<input type="submit" class="proj281" value="Submit" id="btnSubmit" />
 
 					</form>
@@ -195,6 +202,10 @@
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
-
+	<script>
+		$(document).ready(function() {
+			$('[data-toggle="tooltip"]').tooltip();
+		});
+	</script>
 </body>
 </html>
