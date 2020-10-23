@@ -95,11 +95,6 @@ public class MainMenuController extends HttpServlet {
 			String theFileContent = writer.toString();
 
 			String ec2_location = System.getProperty("user.dir") + "/" + "anisha/" + firstusername + fileName;
-			System.out.println("######################################");
-			System.out.println("file name is: " + fileName);
-			System.out.println("this is fro system property: " + System.getProperty("user.dir"));
-			System.out.println("ec2_location: " + ec2_location);
-			System.out.println("######################################");
 
 			File file = new File(ec2_location);
 			if (file.exists()) {

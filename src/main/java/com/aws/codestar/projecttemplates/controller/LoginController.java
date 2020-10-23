@@ -30,7 +30,7 @@ public class LoginController extends HttpServlet {
 		boolean flagForLogin = false;
 		String mainMenuPage = "MainMenu.jsp";
 		String loginPage = "Login.jsp";
-		String message = "invalid username/password";
+		String error_message = "";
 
 		firstusername = request.getParameter("firstusername").toString();
 		lastusername = request.getParameter("lastusername").toString();
@@ -52,10 +52,10 @@ public class LoginController extends HttpServlet {
 				Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		} else {
-			System.out.println("unsuccessful login::::");
-
+			error_message = "Invalid username/password";
+			System.out.println(error_message);
 			RequestDispatcher dispatcher2 = request.getRequestDispatcher("Login.jsp");
-			request.setAttribute("invalid username/password", message);
+			request.setAttribute("message", error_message);
 
 			try {
 				dispatcher2.forward(request, response);
@@ -71,6 +71,5 @@ public class LoginController extends HttpServlet {
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("Inside doGet");
 	}
 }

@@ -80,6 +80,10 @@
 <!-- 					</div> -->
 					
 					<br>
+					<%Object value = request.getAttribute("message");%>
+					<%if (value!=null) {%>
+						<h3 style="color:red;"><%=value%></h3>
+					<%}%>
 					<div class="flex-col-c p-t-155">
 						<span class="txt1 p-b-17">
 							Or Register
